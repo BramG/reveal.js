@@ -4,11 +4,11 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Presentation title - Speaker name</title>
+		<title>The new Display Suite API's - aspilicious</title>
 
     <link rel="shortcut icon" href="lib/image/favicon.ico" />
-		<meta name="description" content="Presentation description">
-		<meta name="author" content="Speaker Name">
+		<meta name="description" content="The new Display Suite API's explained by the maintainer">
+		<meta name="author" content="Aspilicious">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -37,367 +37,457 @@
 	</head>
 
 	<body>
-
 		<div class="reveal">
-        <footer>
-            <div class="branding--logo">
-                <span class="logo__image"><img src="lib/image/logo.png" alt="DrupalDeveloperDays Montpellier 2015 logo" height="55px"></span>
-                <p class="logo__site-name">#drupaldevdays</p>
-            </div>
-            <div class="session--info">
-                <p class="session__title">Presentation title <span class="seperator">&nbsp;/&nbsp;</span></p>
-                <p class="session__presenter">Speaker Name</p>
-            </div>
-        </footer>
+      <footer>
+        <div class="branding--logo">
+          <span class="logo__image"><img src="lib/image/logo.png" alt="DrupalDeveloperDays Montpellier 2015 logo" height="55px"></span>
+          <p class="logo__site-name">#drupaldevdays</p>
+        </div>
+        <div class="session--info">
+          <p class="session__title">The new Display Suite API's <span class="seperator">&nbsp;/&nbsp;</span></p>
+          <p class="session__presenter">Aspilicious</p>
+        </div>
+      </footer>
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section class="ddd-intro" data-background="lib/image/background.jpg">
-					<h1>Presentation name</h1>
-					<h2>Speaker name - @SpeakerName</h3>
+					<h1>The new Display Suite API's</h1>
+					<h2>Aspilicious - @aspilicious</h2>
 				</section>
 
+        <!-- Environment -->
 				<section>
-					<h2>Hello There</h2>
-					<p>
-						This template is aimed to speakers who want to us reveal.js for their slides during DrupalDeveloperDays Montpellier 2015.
-					</p>
+					<h2>Prepare your environment</h2>
+            <ul>
+              <li>Install latest drupal 8</li>
+              <li>Download Display Suite 8.x-2.x-alpha10</li>
+              <li>It depends on the Layout Plugin module</li>
+            </ul>
 				</section>
 
+        <!-- Render caching -->
+        <section>
+          <h2>Disable render/page caching</h2>
+          <pre><code data-trim contenteditable>
+# if (file_exists(__DIR__ . '/settings.local.php')) {
+#   include __DIR__ . '/settings.local.php';
+# }
+          </code></pre>
+        </section>
+
+        <!-- Who am I? -->
 				<section>
-				  <h2>How to use this template</h2>
-					<ul>
-					  <li>Fork <a href="https://github.com/SebCorbin/reveal.js">this repo</a></li>
-					  <li>Edit the file index.html and change according to your session:
-					    <ul>
-					      <li>The &lt;title&gt; tag</li>
-					      <li>The presentation title and speaker name in the &lt;footer&gt; tag</li>
-					      <li>The &lt;h1&gt; and &lt;h2&gt; in the first &lt;section&gt; tag</li>
-					    </ul>
-					  </li>
-					  <li>Commit your changes to the branches <strong>master</strong> and <strong>gh-pages</strong></li>
-					  <li>After a while, they will be <a href="https://sebcorbin.github.io/reveal.js">publicly accessible on http://username.github.io/repository</a></li>
-					</ul>
+				  <h2>Who am I?</h2>
+            <ul>
+              <li>The co-maintainer of Display Suite since 2012</li>
+              <li>The maintainer of Display Suite since 2014</li>
+              <li>Drupal developer @nascom</li>
+            </ul>
 				</section>
 
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
+        <!-- What will you learn? -->
+        <section>
+          <h2>What will you learn?</h2>
+          <ul>
+            <li>Create your own DS layout (20 minutes)</li>
+            <li>Create your own DS field (30 minutes)</li>
+            <li>Create your own DS dynamic field (25 minutes)</li>
+            <li>Create your own DS field template (25 minutes)</li>
+          </ul>
+        </section>
+
+        <!-- Need help? -->
+        <section>
+          <h2>Help! I can't follow!</h2>
+          <ul>
+            <li>Look at the example module</li>
+            <li>Try to work together with your neighbours</li>
+            <li>Talk to me during and after this workshop</li>
+            <li>Try again @home</li>
+          </ul>
+        </section>
+
+        <!-- You're a genius -->
+        <section>
+          <h2>Awesome! I'm done!</h2>
+          <ul>
+            <li>Help your neighbours</li>
+            <li>Try to make something unique</li>
+            <li>Impress me</li>
+          </ul>
+        </section>
+
+        <!-- Create a module -->
+        <section>
+          <section>
+            <h2>Create a module</h2>
+            <p>In 3 steps</p>
+          </section>
+          <section>
+            <h2>Create the folder</h2>
+            <p>Create a directory named "montpellier" in the modules directory (root)</p>
+          </section>
+          <section>
+            <h2>Create the info.yml file</h2>
+            <pre><code data-trim contenteditable>
+type: module
+name: 'Montpellier'
+description: 'Display Suite test module.'
+core: 8.x
+package: 'Display Suite'
+dependencies:
+  - ds
+            </code></pre>
+          </section>
+          <section>
+              <h2>Enable the module</h2>
+              <p>And you're ready to go!</p>
+          </section>
+        </section>
+
+        <!-- Create a Display Suite layout -->
+        <section>
+          <section>
+            <h2>Create your own DS layout</h2>
+            <p>In 3 steps</p>
+          </section>
+          <section>
+            <h2>Define your layout</h2>
+            <p>Create a file named "montpellier.layouts.yml"</p>
+            <pre><code data-trim contenteditable>
+montpellier:
+  label: Montpellier one column layout
+  category: Display Suite
+  type: partial
+  theme: montpellier
+  #icon: images/montpellier.png
+  #library: montpellier/layout
+  regions:
+    main:
+      label: Main content
+            </code></pre>
+          </section>
+          <section>
+            <h2>Create the template</h2>
+            <p>Name it montpellier.html.twig<br/>Place it in a directory named "templates"</p>
+            <pre><code data-trim contenteditable>
+<{{ main_wrapper }} class="montpellier-1col {{ attributes.class }} clearfix" {{ attributes }} >
+
+{% if title_suffix.contextual_links is not null %}
+{{ title_suffix.contextual_links }}
+{% endif %}
+
+{{ main }}
+
+<&#47;{{ main_wrapper }}>
+            </code></pre>
+          </section>
+          <section>
+						<h2>Enable the layout</h2>
+						<p>Enjoy your victory!</p>
 					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
+          <section>
+            <h2>Extra points</h2>
+            <ul>
+              <li>Create multiple regions</li>
+              <li>Attach a css/js library</li>
+              <li>Nest regions (alternative for fieldgroup)</li>
+            </ul>
+          </section>
 				</section>
 
-				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
-				</section>
+        <!-- Create a Display Suite layout -->
+        <section>
+          <section>
+            <h2>Create your own DS field</h2>
+            <p>In 7 steps</p>
+          </section>
+          <section>
+            <h2>Create some directories</h2>
+            <p>All the DS fields should be placed in the same folder<br/> in order for the system to find them.</p>
+            <ul>
+              <li>src (in root)</li>
+              <li>Plugin (in src)</li>
+              <li>DsField (in Plugin)</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Create an empty field</h2>
+            <p>It should extend DsFieldBase</p>
+            <pre><code data-trim contenteditable>
+/**
+ * @file
+ * Contains \Drupal\montpellier\Plugin\DsField\MontpellierTitle.
+ */
 
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
+namespace Drupal\montpellier\Plugin\DsField;
 
-				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
-				</section>
+/**
+ * @todo add annotation
+ */
+class MontpellierTitle extends DsFieldBase {
 
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Create the plugin annotation</h2>
+            <p>This is needed to "discover" the plugin</p>
+            <pre><code data-trim contenteditable>
+/**
+ * Plugin that prefixes the title with "Montpellier"
+ *
+ * @DsField(
+ *   id = "montpellier_title",
+ *   title = @Translation("Montpellier title"),
+ *   entity_type = "node",
+ * )
+ */
+class MontpellierTitle extends DsFieldBase {
 
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Done!</h2>
+            <p>Not really...</p><p>But your field should be visible now in the interface.</p>
+          </section>
+          <section>
+            <h2>Implement the build function</h2>
+            <pre><code data-trim contenteditable>
+class MontpellierTitle extends DsFieldBase {
 
-						```
-						<section data-markdown>
-						  ## Markdown support
+  /**
+   * {@inheritdoc}
+   */
+  public function build() {
+    // Fetch the entity
+    $node = $this->entity();
 
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
-				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-						</div>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code>Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
+    // Always return a render array!
+    return array(
+      '#markup' => $node->title->value,
+      '#prefix' => 'Montpellier ',
+    );
   }
 }
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Use custom settings</h2>
+            <pre><code data-trim contenteditable>
+/**
+ * {@inheritdoc}
+ */
+public function build() {
+  $config = $this->getConfiguration();
 
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
+  // Fetch the entity
+  $node = $this->entity();
 
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
+  // Always return a render array!
+  return array(
+    '#markup' => $node->title->value,
+    '#prefix' => $config['prefix'] . ' ',
+  );
+}
 
-				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							<tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							<tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							<tr>
-						</tbody>
-					</table>
-				</section>
+/**
+ * {@inheritdoc}
+ */
+public function settingsForm($form, FormStateInterface $form_state) {
+  $config = $this->getConfiguration();
 
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
+  $settings['prefix'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Prefix',
+    '#default_value' => $config['prefix'],
+  );
 
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
+  return $settings;
+}
 
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
+/**
+ * {@inheritdoc}
+ */
+public function settingsSummary($settings) {
+  $config = $this->getConfiguration();
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
+  $summary = array();
+  if (!empty($config['prefix'])) {
+    $summary[] = 'Prefix: ' . $config['prefix'];
+  }
 
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
+  return $summary;
+}
 
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
+/**
+ * {@inheritdoc}
+ */
+public function defaultConfiguration() {
+  return array(
+    'prefix' => 'Montpellier',
+  );
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Or a formatter</h2>
+            <pre><code data-trim contenteditable>
+/**
+ * {@inheritdoc}
+ */
+public function build() {
+  $config = $this->getConfiguration();
 
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
+  // Fetch formatter
+  $field = $this->getFieldConfiguration();
+  $formatter = $field['formatter'];
 
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
+  if ($formatter == 'italic') {
+    $prefix = '<em>' . $config['prefix'] . '</em>';
+  }
+  else {
+    $prefix = $config['prefix'];
+  }
 
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
+  // Fetch the entity
+  $node = $this->entity();
 
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
-				</section>
+  // Always return a render array!
+  return array(
+    '#markup' => $node->title->value,
+    '#prefix' => $prefix . ' ',
+  );
+}
+
+/**
+ * {@inheritdoc}
+ */
+public function formatters() {
+  return array(
+    'normal' => 'Normal',
+    'italic' => 'Italic',
+  );
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Limit field in display</h2>
+            <pre><code data-trim contenteditable>
+/**
+ * {@inheritdoc}
+ */
+public function isAllowed() {
+  if ($this->bundle() != 'article') {
+    return FALSE;
+  }
+  else if ($this->viewMode() == 'teaser') {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <!-- Create a Display Suite field template -->
+        <section>
+          <section>
+            <h2>Create your own<br/> DS field template</h2>
+            <p>In 4 steps</p>
+          </section>
+          <section>
+            <h2>Create some directories</h2>
+            <p>All the DS field templates should be placed in the same folder in order for the system to find them.</p>
+            <ul>
+              <li>src (in root)</li>
+              <li>Plugin (in src)</li>
+              <li>DsFieldTemplate (in Plugin)</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Create an empty field layout class</h2>
+            <p>It should extend DsFieldLayoutBase</p>
+            <pre><code data-trim contenteditable>
+/**
+ * @file
+ * Contains \Drupal\montpellier\Plugin\DsFieldLayout\Montpellier.
+ */
+
+namespace Drupal\montpellier\Plugin\DsFieldLayout;
+
+use Drupal\ds\Plugin\DsFieldLayout\DsFieldLayoutBase;
+
+/**
+ * @todo create the annotation
+ */
+class Montpellier extends DsFieldLayoutBase {
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Create the plugin annotation</h2>
+            <p>This is needed to "discover" the layout</p>
+            <pre><code data-trim contenteditable>
+/**
+ * @DsFieldLayout(
+ *   id = "montpellier",
+ *   title = @Translation("Montpellier"),
+ *   theme = "theme_ds_field_montpellier",
+ * )
+ */
+class Montpellier extends DsFieldLayoutBase {
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Implement the theme function</h2>
+            <pre><code data-trim contenteditable>
+/**
+ * Wraps the output in a montpellier class
+ */
+function theme_ds_field_montpellier($variables) {
+  $output = '';
+
+  // Render the label.
+  if (!$variables['label_hidden']) {
+    $output .= '<div class="field-label-' . $variables['element']['#label_display'] . '">' . $variables['label'];
+    if (\Drupal::config('ds.settings')->get('ft-show-colon')) {
+      $output .= ':';
+    }
+    $output .= '</div>';
+  }
+
+  // Render the items.
+  foreach ($variables['items'] as $item) {
+    $output .= drupal_render($item['content']);
+  }
+
+  return '<div class="montpellier">' . $output .'</div>';
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <!-- Remarks -->
+        <section>
+          <h2>Important to know</h2>
+          <ul>
+            <li>API is not yet 100% stable</li>
+            <li>Don't forget to think about caching</li>
+          </ul>
+        </section>
+
+        <!-- The end! -->
+        <section>
+          <h2>The end!</h2>
+          <p>Got questions?</p>
+          </ul>
+        </section>
 
 			</div>
-
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
