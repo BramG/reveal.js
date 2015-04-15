@@ -471,6 +471,233 @@ function theme_ds_field_montpellier($variables) {
           </section>
         </section>
 
+        <!-- Create a Display Suite dynamic field -->
+        <section>
+            <section>
+                <h2>Create your own<br/> DS *dynamic* field</h2>
+                <p>In 7 steps</p>
+            </section>
+            <section>
+                <h2>Create some directories</h2>
+                <p>All the DS dynamic fields need a form.</p>
+                <ul>
+                    <li>src (in root)</li>
+                    <li>Forms (in src)</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Create the form</h2>
+                <p>It should extend FieldFormBase</p>
+                <pre><code data-trim contenteditable>
+/**
+ * @file
+ * Contains \Drupal\montpellier\Form\MontpellierFieldForm.
+ */
+
+namespace Drupal\montpellier\Form;
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\ds\Form\FieldFormBase;
+
+/**
+ * Configures montpellier fields.
+ */
+class MontpellierFieldForm extends FieldFormBase {
+
+  /**
+   * The type of the dynamic ds field
+   */
+  const TYPE = 'montpellier';
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormId() {
+    return 'ds_field_form';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(array $form, FormStateInterface $form_state, $field_key = '') {
+    $form = parent::buildForm($form, $form_state, $field_key);
+    $field = $this->field;
+
+    $form['content'] = array(
+      '#type' => 'text_format',
+      '#title' => t('Field content'),
+      '#default_value' => isset($field['properties']['content']['value']) ? $field['properties']['content']['value'] : '',
+      '#format' => isset($field['properties']['content']['format']) ? $field['properties']['content']['format'] : 'plain_text',
+      '#base_type' => 'textarea',
+      '#required' => TRUE,
+    );
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getProperties(FormStateInterface $form_state) {
+    return array(
+      'content' => $form_state->getValue('content'),
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getType() {
+    return MontpellierFieldForm::TYPE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getTypeLabel() {
+    return 'Montpellier field';
+  }
+
+}
+            </code></pre>
+            </section>
+            <section>
+                <h2>Create routes for this form</h2>
+                <p>Placed in a routing.yml file</p>
+                 <pre><code data-trim contenteditable>
+ds.manage_montpellier_field:
+  path: 'admin/structure/ds/fields/manage_montpellier/{field_key}'
+  defaults:
+    _form: '\Drupal\montpellier\Form\MontpellierFieldForm'
+    _title: 'Edit a montpellier field'
+  requirements:
+    _permission: 'admin fields'
+ds.add_montpellier_field:
+  path: 'admin/structure/ds/fields/manage_montpellier'
+  defaults:
+    _form: '\Drupal\montpellier\Form\MontpellierFieldForm'
+    _title: 'Add a montpellier field'
+  requirements:
+    _permission: 'admin fields'
+                </code></pre>
+            </section>
+            <section>
+                <h2>Create a local action</h2>
+                <p>Placed in a links.action.yml file</p>
+                <pre><code data-trim contenteditable>
+ds.montpellier_field_add_local_action:
+  route_name: ds.add_montpellier_field
+  title: 'Add a montpellier field'
+  appears_on:
+    - ds.fields_list
+                </code></pre>
+            </section>
+            <section>
+                <h2>Create some directories</h2>
+                <p>This needed for the magic to happen</p>
+                <ul>
+                    <li>src (in root)</li>
+                    <li>Plugin (in src)</li>
+                    <li>Derivative (in Plugin)</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Create the derivative</h2>
+                <p>It has to extend the DynamicField class of DS</p>
+                <pre><code data-trim contenteditable>
+/**
+ * @file
+ * Contains \Drupal\montpellier\Plugin\Derivative\DynamicMontpellierField.
+ */
+
+namespace Drupal\montpellier\Plugin\Derivative;
+
+use Drupal\montpellier\Form\MontpellierFieldForm;
+use Drupal\ds\Plugin\Derivative\DynamicField;
+
+/**
+ * Retrieves dynamic code field plugin definitions.
+ */
+class DynamicMontpellierField extends DynamicField {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getType() {
+    return MontpellierFieldForm::TYPE;
+  }
+
+}
+                </code></pre>
+            </section>
+            <section>
+                <h2>Create the actual DS field</h2>
+                <pre><code data-trim contenteditable>
+/**
+ * @file
+ * Contains \Drupal\montpellier\Plugin\DsField\DynamicMontpellierField.
+ */
+
+namespace Drupal\montpellier\Plugin\DsField;
+
+use Drupal\ds\Plugin\DsField\DsFieldBase;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Defines a generic dynamic montpellier field.
+ *
+ * @DsField(
+ *   id = "dynamic_montpellier_field",
+ *   deriver = "Drupal\montpellier\Plugin\Derivative\DynamicMontpellierField"
+ * )
+ */
+class DynamicMontpellierField extends DsFieldBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function build() {
+    $content = $this->content();
+    $format = $this->format();
+
+    return array(
+      '#type' => 'processed_text',
+      '#text' => $content,
+      '#format' => $format,
+      '#filter_types_to_skip' => array(),
+      '#langcode' => '',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function content() {
+    $definition = $this->getPluginDefinition();
+    return $definition['properties']['content']['value'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function format() {
+    $definition = $this->getPluginDefinition();
+    return $definition['properties']['content']['format'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isAllowed() {
+    $definition = $this->getPluginDefinition();
+    return DsFieldBase::dynamicFieldIsAllowed($definition, $this->bundle(), $this->viewMode());
+  }
+
+}
+                </code></pre>
+            </section>
+        </section>
+
         <!-- Remarks -->
         <section>
           <h2>Important to know</h2>
